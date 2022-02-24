@@ -1,3 +1,17 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.navbar_brand {
+  display: flex;
+  align-items: center;
+}
 .navbar_logo {
   width: 150px;
+  pointer-events: none;
+}
+.navbar_btns > * {
+  margin-right: 10px;
 }
