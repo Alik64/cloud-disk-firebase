@@ -1,4 +1,7 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,4 +17,32 @@
 }
 .navbar_btns > * {
   margin-right: 10px;
+}
+.navbar_mobil img {
+  width: 35px;
+  margin-right: 15px;
+}
+.navbar_mobil.hide {
+  display: none;
+}
+.navbar_menu.mobile {
+  position: absolute;
+  left: 0;
+  top: 100px;
+  width: 100%;
+}
+.navbar_btns.mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 50px -20px;
+
+  padding: 50px 0;
+}
+
+.navbar_btns.mobile .navbar_btn {
+  background: none;
+  border: none;
+  padding: 25px 0;
+  font-size: 17px;
 }
