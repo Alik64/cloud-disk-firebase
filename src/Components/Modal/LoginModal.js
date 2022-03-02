@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUp } from '../../Firebase/firebase-config'
+import { login } from '../../Firebase/firebase-config'
+import { setUser } from '../../redux/userReducer'
 import { modalClose } from '../../redux/modalReducer'
 import './Modal.css'
 
-export default function SignUpModal() {
-    const signUpModalState = useSelector(state => state.modal.signUpModal)
+export default function LoginModal() {
+    const signInModalState = useSelector(state => state.modal.signInModal)
+
     const dispatch = useDispatch()
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [validation, setValidation] = useState("")
@@ -16,25 +19,21 @@ export default function SignUpModal() {
     }
 
 
+
     const formHandler = async (e) => {
         e.preventDefault()
         if (password.length < 6) {
             setValidation("6 characters min")
             return
         }
-
         try {
-            const cred = await signUp(email, password)
-            console.log(cred.user)
+            const cred = await login(email, password)
+            dispatch(setUser(cred.user))
             closeModal()
+
         } catch (err) {
 
-            if (err.code === "auth/email-already-in-use") {
-                setValidation("User already exist")
-            }
-            if (err.code === "auth/invalid-email") {
-                setValidation("Invalid E-mail")
-            }
+            setValidation("OOps! Email or/and Password are incorect")
         }
 
     }
@@ -42,11 +41,11 @@ export default function SignUpModal() {
     return (
         <>
 
-            {signUpModalState && <div className='modal'>
+            {signInModalState && <div className='modal'>
                 <div className="modal_overlay" onClick={closeModal}></div>
                 <div className='modal_content'>
                     <div className="modal_header">
-                        <div className="modal_title"><h2>Sign up</h2></div>
+                        <div className="modal_title"><h2>Login</h2></div>
                         <button className='modal_close' onClick={closeModal}>X</button>
                     </div>
                     <div className="modal_body">
