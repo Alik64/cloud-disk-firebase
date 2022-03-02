@@ -1,12 +1,13 @@
 
-import { signInToggle, signUpToggle, modalClose } from '../../redux/modalReducer'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-
+import { Link } from 'react-router-dom'
 import './navbar.css'
 import logo from '../../assets/images/cloud-cd-logo.png'
 import menu from '../../assets/images/mobil-menu.svg'
 import { useWindowSize } from '../../utils/custom-hooks';
+import { signInToggle, signUpToggle, modalClose } from '../../redux/modalReducer'
 
 
 
@@ -15,8 +16,8 @@ import { useWindowSize } from '../../utils/custom-hooks';
 
 
 export default function Navbar() {
-    const modalIn = useSelector(state => state.modal.signInModal)
-    const modalUp = useSelector(state => state.modal.signUpModal)
+
+
     const [menuState, setMenuState] = useState(false)
 
     const toggleMenu = () => {
@@ -28,11 +29,13 @@ export default function Navbar() {
     const dispatch = useDispatch()
 
     return (
-        <nav className="navbar ">
-            <div className='navbar_brand'>
-                <img src={logo} className='navbar_logo' alt="brand logo" />
-                <h1><span>Cloud</span><span>Disk</span></h1>
-            </div>
+        <nav className="navbar app_wrapper">
+            <Link to="/">
+                <div className='navbar_brand'>
+                    <img src={logo} className='navbar_logo' alt="brand logo" />
+                    <h1><span style={{ color: "var(--blue)" }} >Cloud</span><span style={{ color: "var(--green)" }} >Disk</span></h1>
+                </div>
+            </Link>
             <div className={size.width < 480 ? "navbar_mobil visible" : "navbar_mobil hide"}>
                 <img onClick={toggleMenu}
                     src={menu} alt="" />
@@ -41,8 +44,8 @@ export default function Navbar() {
 
 
                 <div>
-                    {modalIn && <h2>modalIn</h2>}
-                    {modalUp && <h2>modalUp</h2>}
+
+
 
                 </div>
                 <div className={size.width < 480 ? "navbar_btns mobile" : "navbar_btns"}

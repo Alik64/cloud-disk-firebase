@@ -1,11 +1,15 @@
 .navbar {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+  background: #fff;
 }
 .navbar_brand {
   display: flex;
@@ -30,12 +34,14 @@
   left: 0;
   top: 100px;
   width: 100%;
+  z-index: 10;
 }
 .navbar_btns.mobile {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 50px -20px;
+  background-color: #fff;
 
   padding: 50px 0;
 }
