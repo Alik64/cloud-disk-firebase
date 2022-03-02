@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { signUp } from '../../Firebase/filebase-auth'
 import { modalClose } from '../../redux/modalReducer'
 import './Modal.css'
 
@@ -9,12 +10,32 @@ export default function SignUpModal() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [validation, setValidation] = useState("")
+
     const closeModal = () => {
         dispatch(modalClose())
     }
-    const formHandler = (e) => {
+
+    const formHandler = async (e) => {
         e.preventDefault()
-        setValidation("Test")
+        if (password.length < 6) {
+            setValidation("6 characters min")
+            return
+        }
+        try {
+            const cred = await signUp(email, password)
+            setEmail("")
+            setPassword("")
+            closeModal()
+        } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                setValidation("User already exist")
+            }
+            if (error.code === "auth/invalid-email") {
+                setValidation("Invalid Email")
+            }
+
+        }
+
     }
 
     return (
