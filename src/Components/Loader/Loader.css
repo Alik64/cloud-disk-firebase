@@ -1,0 +1,9 @@
+.loader {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.loader_img {
+  width: 100px;
+}
