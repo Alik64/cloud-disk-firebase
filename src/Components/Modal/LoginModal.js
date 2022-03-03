@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../Firebase/firebase-config'
-import { setUser } from '../../redux/userReducer'
-import { modalClose } from '../../redux/modalReducer'
 import './Modal.css'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import { modalClose } from '../../redux/modalReducer'
+import { login } from '../../Firebase/firebase-config'
+
 
 export default function LoginModal() {
     const signInModalState = useSelector(state => state.modal.signInModal)
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [validation, setValidation] = useState("")
@@ -27,8 +30,12 @@ export default function LoginModal() {
             return
         }
         try {
-            const cred = await login(email, password)
-            dispatch(setUser(cred.user))
+            await login(email, password)
+
+            setPassword("")
+            setEmail("")
+            setValidation("")
+            navigate('/private/private-home')
             closeModal()
 
         } catch (err) {
