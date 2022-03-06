@@ -23,14 +23,14 @@ export default function LoginModal() {
 
 
 
-    const formHandler = async (e) => {
+    const formHandler = (e) => {
         e.preventDefault()
         if (password.length < 6) {
             setValidation("6 characters min")
             return
         }
         try {
-            await login(email, password)
+            login(email, password)
 
             setPassword("")
             setEmail("")
